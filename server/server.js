@@ -82,32 +82,6 @@ app.post("/login", (req, res) => {
   });
 });
 
-const storage = multer.diskStorage({
-    destination: (req,file,cb) =>{
-        cb(null,'Public/Images')
-    },
-    filename: (req,file,cb)=>{
-        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
-    }
-})
-
-const uplaod = multer({
-    storage: storage
-})
-
-app.post('/create',verifyUser ,uplaod.single('file'),(req,res)=>{
-    try {
-        const { title, description }=req.body;
-        const  { file } = req.file.file;
-        PostModel.create({title , description , file})
-        .then((posts) => res.json(posts))
-        .catch(err=> res.json(err))
-    } catch (error) {
-        console.error("Error in multer middleware:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-})
-
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
   return res.json("Success");

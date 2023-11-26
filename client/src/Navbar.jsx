@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "./App";
-import axios from "axios"
+import axios from "axios";
 
 const Navbar = () => {
   const user = useContext(userContext);
-  const navigate = useNavigate()
-  const handleLogout = () =>{
-    axios.get('http://localhost:4001/logout')
-    .then(res=>{
-      if (res.data === "Success")
-      navigate(0)
-    }).catch(err=>console.log(err))
-  }
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios
+      .get("http://localhost:4001/logout")
+      .then((res) => {
+        if (res.data === "Success") navigate(0);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div
       style={{
@@ -31,11 +32,24 @@ const Navbar = () => {
       <div>
         <h3>Blog</h3>
       </div>
-      <div style={{ display: "flex", width: "40%", flexDirection: "row", justifyContent: "space-evenly" }}>
-  <Link style={{ color: "whitesmoke" }} to="/home">Home</Link>
-  <Link style={{ color: "whitesmoke" }} to="/create">Create</Link>
-  <Link style={{ color: "whitesmoke" }} to="/contact">Contact</Link>
-</div>
+      <div
+        style={{
+          display: "flex",
+          width: "40%",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Link style={{ color: "whitesmoke" }} to="/home">
+          Home
+        </Link>
+        <Link style={{ color: "whitesmoke" }} to="/create">
+          Create
+        </Link>
+        <Link style={{ color: "whitesmoke" }} to="/contact">
+          Contact
+        </Link>
+      </div>
 
       {user.username ? (
         <div>
