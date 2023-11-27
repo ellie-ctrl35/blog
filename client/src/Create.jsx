@@ -4,17 +4,14 @@ import { useState } from "react";
 const Create = () => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const [file, setFile] = useState();
    
   const handleSubmit = (e) => {
     e.preventdefault()
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('description', description)
-    formData.append('file',file)
-    axios.post('http://localhost:4001/create',formData)
+    axios.post('http://localhost:4001/create',{title,description})
     .then(res =>{
-      console.log(res)
+      if(res.data === "Success"){
+        window.loacation.href="/home"
+      }
     })
     .catch(err=> console.log(err))
   };
@@ -39,7 +36,6 @@ const Create = () => {
             cols="30"
             rows="10"
           ></textarea>
-          <input type="file" name="file" onChange={e=>setFile(e.target.files[0])}/>
           <button>Post</button>
         </form>
       </div>

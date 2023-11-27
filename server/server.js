@@ -18,7 +18,10 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(cookieParser());
+
+app.use(express.static('public'))
 
 mongoose
   .connect("mongodb+srv://tickle:tickle123@cluster0.irxj5yg.mongodb.net/blog")
@@ -82,10 +85,10 @@ app.post("/login", (req, res) => {
 });
 
 const storage = multer.diskStorage({
-  destination: (req,file,cb)=>{
-    cb(null, 'Public/Images')
+  destination: (req,file,cb) => {
+    cb(null, './Public/Images')
   },
-  filename : (req,file,cb)=>{
+  filename : (req, file, cb) => {
     cb(null, file.fieldname + "_"+ Date.now() + path.extname(file.originalname))
   }
 })
@@ -97,14 +100,11 @@ const upload = multer({
   },
 })
 
-app.post('/create',verifyUser,upload.single('file') ,(req,res)=>{
-  try {
-    console.log(req.file);
-    res.json({ message: 'File uploaded successfully!' });
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.post('/create', verifyUser ,(req,res)=>{
+  const {title,description}= req.body;
+    PostModel.create({title,description})
+    .then(result => res.json("Success"))
+    .catch(err => res.json(err))
 })
 
 app.get("/logout", (req, res) => {
