@@ -45,7 +45,6 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-
 app.get("/", verifyUser, (req, res) => {
   return res.json({ email: req.email, username: req.username });
 });
@@ -81,6 +80,32 @@ app.post("/login", (req, res) => {
     }
   });
 });
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb)=>{
+    cb(null, 'Public/Images')
+  },
+  filename : (req,file,cb)=>{
+    cb(null, file.fieldname + "_"+ Date.now() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({
+   storage: storage,
+   limits: {
+    fileSize: 1024 * 1024 * 5, // 5 MB (adjust as needed)
+  },
+})
+
+app.post('/create',verifyUser,upload.single('file') ,(req,res)=>{
+  try {
+    console.log(req.file);
+    res.json({ message: 'File uploaded successfully!' });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
