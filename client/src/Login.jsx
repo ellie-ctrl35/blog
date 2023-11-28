@@ -13,7 +13,7 @@ const Login = () => {
      axios.post('http://localhost:4001/login',{ email, password })
      .then(res =>{
       if(res.data === "Success"){
-        window.location.href='/home'
+        navigate('/home')
       }
      })
      .catch(err => console.log(err))
