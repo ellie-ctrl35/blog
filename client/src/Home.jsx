@@ -18,19 +18,18 @@ const Home = () => {
     <div style={{ marginTop: "5%" }}>
       <div style={{ width: "100vw" }}>
         {posts.map((post) => (
-          <Link to={`/post/${post._id}`}>
-            <div
-              style={{
-                borderColor: "white",
-                borderWidth: "2px",
-                border: "solid",
-                margin: "1%",
-                width: "80%",
-              }}
-            >
-              <h1>{post.title}</h1>
-              <h2>{post.description}</h2>
-            </div>
+          <Link
+            to={`/post/${post._id}`} 
+            style={{
+              borderColor: "white",
+              borderWidth: "2px",
+              border: "solid",
+              margin: "1%",
+              width: "80%",
+            }}
+          >
+            <h1>{post.title}</h1>
+            <h2>{post.description}</h2>
           </Link>
         ))}
       </div>

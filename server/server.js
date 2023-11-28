@@ -121,6 +121,13 @@ app.get('/getposts',verifyUser,(req,res)=>{
   .catch(er => console.log(err))
 })
 
+app.get('/getpostbyid/:id',(req,res)=>{
+  const id = req.params.id
+  PostModel.findById({_id:id})
+  .then(post => res.json(post))
+  .catch(err => console.log(err))
+})
+
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
   return res.json("Success"); 
