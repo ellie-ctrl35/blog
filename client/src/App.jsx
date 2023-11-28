@@ -8,6 +8,7 @@ import Register from "./Register";
 import Login from "./Login";
 import Home from "./Home";
 import Create from "./Create";
+import Post from "./Post";
 
 export const userContext = createContext();
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/create" element={<Create />}></Route>
+          <Route path="/post" element={<Post/>}></Route>
         </Routes>
       </BrowserRouter>
     </userContext.Provider>

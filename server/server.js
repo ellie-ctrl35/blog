@@ -123,7 +123,7 @@ app.get('/getposts',verifyUser,(req,res)=>{
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
-  return res.json("Success");
+  return res.json("Success"); 
 });
 
 app.listen(4001, () => {
