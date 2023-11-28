@@ -101,10 +101,10 @@ const upload = multer({
 })
 
 app.post('/create', verifyUser, (req, res) => {
-  const { title, description } = req.body;
-  console.log("Received request:", title, description);
+  const { title, description,email } = req.body;
+  console.log("Received request:", title, description,email);
 
-  PostModel.create({ title, description })
+  PostModel.create({ title, description ,email})
     .then(result => {
       console.log("Post created:", result);
       res.json("Success");
@@ -126,6 +126,22 @@ app.get('/getpostbyid/:id',(req,res)=>{
   PostModel.findById({_id:id})
   .then(post => res.json(post))
   .catch(err => console.log(err))
+})
+app.put('/editpostby/:id',(req,res)=>{
+  const id = req.params.id;
+  PostModel.findByIdAndUpdate(
+      {_id: id},
+      {title: req.body.title},
+      {description: req.body.description }
+    ).then(result => res.json("Success"))
+    .catch(err => res.json(err))
+})
+
+app.delete('/deletepost/:id',(req,res)=>{
+  const id = req.params.id
+  PostModel.findByIdAndDelete({_id:id},{title: req.body.title},{description:req.body.description})
+  .then(result => res.json("Success"))
+  .catch(err => res.json(err)) 
 })
 
 app.get("/logout", (req, res) => {

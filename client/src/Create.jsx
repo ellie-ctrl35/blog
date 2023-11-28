@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { userContext } from "./App";
 const Create = () => {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-   
+  const formData = new FormData()
+  formData.append('title',title)
+  formData.append('description',description)
+  formData.append('email',user.email)
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:4001/create',{title,description})
+    axios.post('http://localhost:4001/create',formData)
     .then(res =>{
       if(res.data === "Success"){
        console.log("posted")

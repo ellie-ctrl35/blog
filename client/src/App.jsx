@@ -9,6 +9,7 @@ import Login from "./Login";
 import Home from "./Home";
 import Create from "./Create";
 import Post from "./Post";
+import EditPost from "./EditPost";
 
 export const userContext = createContext();
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/create" element={<Create />}></Route>
           <Route path="/post" element={<Post/>}></Route>
+          <Route path="/editpost/:id" element={<EditPost/>}></Route>
         </Routes>
       </BrowserRouter>
     </userContext.Provider>
