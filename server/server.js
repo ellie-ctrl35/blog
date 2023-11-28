@@ -115,6 +115,11 @@ app.post('/create', verifyUser, (req, res) => {
     });
 });
 
+app.get('/getposts',verifyUser,(req,res)=>{
+  PostModel.find()
+  .then(posts => res.json(posts))
+  .catch(er => console.log(err))
+})
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
