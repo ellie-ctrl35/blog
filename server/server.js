@@ -100,12 +100,21 @@ const upload = multer({
   },
 })
 
-app.post('/create', verifyUser ,(req,res)=>{
-  const {title,description}= req.body;
-    PostModel.create({title,description})
-    .then(result => res.json("Success"))
-    .catch(err => res.json(err))
-})
+app.post('/create', verifyUser, (req, res) => {
+  const { title, description } = req.body;
+  console.log("Received request:", title, description);
+
+  PostModel.create({ title, description })
+    .then(result => {
+      console.log("Post created:", result);
+      res.json("Success");
+    })
+    .catch(err => {
+      console.error("Error creating post:", err);
+      res.json(err);
+    });
+});
+
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");

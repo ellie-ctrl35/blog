@@ -6,11 +6,11 @@ const Create = () => {
   const [description, setDescription] = useState();
    
   const handleSubmit = (e) => {
-    e.preventdefault()
+    e.preventDefault()
     axios.post('http://localhost:4001/create',{title,description})
     .then(res =>{
       if(res.data === "Success"){
-        window.loacation.href="/home"
+       console.log("posted")
       }
     })
     .catch(err=> console.log(err))
