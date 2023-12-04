@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div
       style={{
-        background: "yellow",
+        background: "blue",
         height: "10%",
         alignItems: "center",
         width: "100vw",
