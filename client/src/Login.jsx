@@ -28,7 +28,7 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input type="password" onChange={e=> setPassword(e.target.value)}/>
           <br />
-          <button> Login</button>
+          <button> Log In</button>
         </form>
         <br />
         <p>Dont have an account?</p>
