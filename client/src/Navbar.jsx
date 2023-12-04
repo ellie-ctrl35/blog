@@ -47,7 +47,7 @@ const Navbar = () => {
           Create
         </Link>
         <Link style={{ color: "whitesmoke" }} to="/contact">
-          Contact
+          Others
         </Link>
       </div>
 
